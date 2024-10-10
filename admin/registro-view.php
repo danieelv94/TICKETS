@@ -1,27 +1,25 @@
-<?php 
-session_start();
+<?php
+// Solución para evitar el error de session_start()
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
-if($_SESSION['nombre']!="" && $_SESSION['tipo']=="admin"){ 
-    ?>    
-    <?php
-    if(isset($_POST['user_reg']) && isset($_POST['clave_reg']) && isset($_POST['nom_complete_reg'])){
-        $nombre_reg=MysqlQuery::RequestPost('nom_complete_reg');
-        $user_reg=MysqlQuery::RequestPost('user_reg');
-        $clave_reg=md5(MysqlQuery::RequestPost('clave_reg'));
-        $clave_reg2=MysqlQuery::RequestPost('clave_reg');
-        $email_reg=MysqlQuery::RequestPost('email_reg');
+// Solución para el error de timezone
+date_default_timezone_set('America/Mexico_City');
 
-        $asunto="Registro de cuenta en CEAA";
-        $cabecera="From: Daniel Lopez Vega <daniel.lopez@hidalgo.gob.mx>";
-        $mensaje_mail="Hola ".$nombre_reg.", Gracias por registrarte en CEAA El Salvador. Los datos de cuenta son los siguientes:\nNombre Completo: ".$nombre_reg."\nNombre de usuario: ".$user_reg."\nClave: ".$clave_reg2."\nEmail: ".$email_reg."\n Página principal: http://ceaa.hidalgo.gob.mx/";
+if ($_SESSION['nombre'] != "" && $_SESSION['tipo'] == "admin") {
+    if (isset($_POST['user_reg']) && isset($_POST['clave_reg']) && isset($_POST['nom_complete_reg'])) {
+        $nombre_reg = MysqlQuery::RequestPost('nom_complete_reg');
+        $user_reg = MysqlQuery::RequestPost('user_reg');
+        $clave_reg = md5(MysqlQuery::RequestPost('clave_reg'));
+        $clave_reg2 = MysqlQuery::RequestPost('clave_reg');
+        $email_reg = MysqlQuery::RequestPost('email_reg');
 
-        
-        if(MysqlQuery::Guardar("usuario", "nombre_completo, nombre_usuario, email_usuario, clave", "'$nombre_reg', '$user_reg', '$email_reg', '$clave_reg'")){
+        $asunto = "Registro de cuenta en CEAA";
+        $cabecera = "From: Daniel Lopez Vega <daniel.lopez@hidalgo.gob.mx>";
+        $mensaje_mail = "Hola " . $nombre_reg . ", Gracias por registrarte en CEAA El Salvador. Los datos de cuenta son los siguientes:\nNombre Completo: " . $nombre_reg . "\nNombre de usuario: " . $user_reg . "\nClave: " . $clave_reg2 . "\nEmail: " . $email_reg . "\n Página principal: http://ceaa.hidalgo.gob.mx/";
 
-            /*----------  Enviar correo con los datos de la cuenta 
-                mail($email_reg, $asunto, $mensaje_mail, $cabecera);
-            ----------*/
-
+        if (MysqlQuery::Guardar("usuario", "nombre_completo, nombre_usuario, email_usuario, clave", "'$nombre_reg', '$user_reg', '$email_reg', '$clave_reg'")) {
             echo '
                 <div class="alert alert-info alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;"> 
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -31,7 +29,7 @@ if($_SESSION['nombre']!="" && $_SESSION['tipo']=="admin"){
                     </p>
                 </div>
             ';
-        }else{
+        } else {
             echo '
                 <div class="alert alert-danger alert-dismissible fade in col-sm-3 animated bounceInDown" role="alert" style="position:fixed; top:70px; right:10px; z-index:10;"> 
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -40,7 +38,7 @@ if($_SESSION['nombre']!="" && $_SESSION['tipo']=="admin"){
                         ERROR AL REGISTRARSE: Por favor intente nuevamente.
                     </p>
                 </div>
-            '; 
+            ';
         }
     }
 ?>
@@ -95,6 +93,8 @@ if($_SESSION['nombre']!="" && $_SESSION['tipo']=="admin"){
 </script>
 
 <?php
-}else{
+} else {
+    // Manejo del caso en el que no es administrador o no hay sesión activa
+    echo 'No tienes permiso para ver esta página.';
 }
 ?>
