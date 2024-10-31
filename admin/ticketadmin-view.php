@@ -111,7 +111,7 @@
                                         <th class="text-center">Estado</th>
                                         <th class="text-center">Nombre</th>
                                         <th class="text-center">Email</th>
-                                        <th class="text-center">Departamento</th>
+                                        <th class="text-center">Direccion</th>
                                         <th class="text-center">Opciones</th>
                                     </tr>
                                 </thead>

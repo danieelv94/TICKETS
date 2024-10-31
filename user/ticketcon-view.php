@@ -64,7 +64,7 @@ if(mysqli_num_rows($consulta_tablaTicket)>=1){
                                           </div>
                                           <br>
                                           <div class="row">
-                                              <div class="col-sm-6"><strong>Departamento:</strong> <?php echo $lsT['departamento']; ?></div>
+                                              <div class="col-sm-6"><strong>Direccion:</strong> <?php echo $lsT['departamento']; ?></div>
                                               <div class="col-sm-6"><strong>Asunto:</strong> <?php echo $lsT['asunto']; ?></div>
                                           </div>
                                           <br>

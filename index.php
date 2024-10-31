@@ -52,6 +52,5 @@ header('Content-Type: text/html; charset=UTF-8');
         ?>
 
         
-      <?php include './inc/footer.php'; ?>
     </body>
 </html>

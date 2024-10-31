@@ -42,7 +42,7 @@ $pdf->Cell (35,10,'Nombre',1,0,'C',true);
 $pdf->Cell (0,10,iconv("UTF-8", "ISO-8859-1",$reg['nombre_usuario']),1,1,'L');
 $pdf->Cell (35,10,'Email',1,0,'C',true);
 $pdf->Cell (0,10,iconv("UTF-8", "ISO-8859-1",$reg['email_usuario']),1,1,'L');
-$pdf->Cell (35,10,'Departamento',1,0,'C',true);
+$pdf->Cell (35,10,'Direccion',1,0,'C',true);
 $pdf->Cell (0,10,iconv("UTF-8", "ISO-8859-1",$reg['departamento']),1,1,'L');
 $pdf->Cell (35,10,'Asunto',1,0,'C',true);
 $pdf->Cell (0,10,iconv("UTF-8", "ISO-8859-1",$reg['asunto']),1,1,'L');

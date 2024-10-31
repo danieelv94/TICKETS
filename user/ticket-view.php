@@ -1,7 +1,7 @@
 <?php if(isset($_SESSION['nombre']) && isset($_SESSION['tipo'])){
         
 
-        if(isset($_POST['fecha_ticket']) && isset($_POST['name_ticket']) && isset($_POST['email_ticket'])){
+        if(isset($_POST['name_ticket']) && isset($_POST['email_ticket'])){
 
           /*Este codigo nos servira para generar un numero diferente para cada ticket*/
           $codigo = ""; 
@@ -18,7 +18,6 @@
           /*Fin codigo numero de ticket*/
 
 
-          $fecha_ticket= MysqlQuery::RequestPost('fecha_ticket');
           $nombre_ticket= MysqlQuery::RequestPost('name_ticket');
           $email_ticket=MysqlQuery::RequestPost('email_ticket');
           $departamento_ticket=MysqlQuery::RequestPost('departamento_ticket');
@@ -29,7 +28,7 @@
           $mensaje_mail="¡Gracias por reportarnos su problema! Buscaremos una solución para su producto lo mas pronto posible. Su ID ticket es: ".$id_ticket;
           $mensaje_mail=wordwrap($mensaje_mail, 70, "\r\n");
 
-          if(MysqlQuery::Guardar("ticket","fecha,nombre_usuario,email_usuario,departamento,asunto,mensaje,estado_ticket,serie,solucion", "'$fecha_ticket','$nombre_ticket','$email_ticket','$departamento_ticket','$asunto_ticket','$mensaje_ticket', '$estado_ticket','$id_ticket',''")){
+          if(MysqlQuery::Guardar("ticket","nombre_usuario,email_usuario,departamento,asunto,mensaje,estado_ticket,serie,solucion", "'$nombre_ticket','$email_ticket','$departamento_ticket','$asunto_ticket','$mensaje_ticket', '$estado_ticket','$id_ticket',''")){
 
             /*----------  Enviar correo con los datos del ticket
             mail($email_ticket, $asunto_ticket, $mensaje_mail, $cabecera)
@@ -89,7 +88,7 @@
                             <label class="col-sm-2 control-label">Fecha</label>
                             <div class='col-sm-10'>
                                 <div class="input-group">
-                                    <input class="form-control" type="text" id="fechainput" placeholder="Fecha" name="fecha_ticket" required="" readonly>
+                                    <input class="form-control" type="text" " placeholder="<?php echo date("Y-m-d");?>"  required="" readonly>
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
                             </div>
@@ -116,13 +115,18 @@
                         </div>
 
                         <div class="form-group">
-                          <label  class="col-sm-2 control-label">Departamento</label>
+                          <label  class="col-sm-2 control-label">Direccion</label>
                           <div class="col-sm-10">
                               <div class='input-group'>
                                 <select class="form-control" name="departamento_ticket">
-                                  <option value="Dirección de Gestión Institucional">Ventas</option>
-                                  <option value="Software">Software</option>
-                                  <option value="Hardware">Hardware</option>
+                                <option value="Direccion de Gestion Institucional">Direccion de Gestion Institucional</option>
+                                  <option value="Direccion de Infraestructura Hidraulica">Direccion de Infraestructura Hidraulica</option>
+                                  <option value="Dirección de Investigacion y Vinculacion del Agua">Dirección de Investigacion y Vinculacion del Agua</option>
+                                  <option value="Dirección de Calidad del Agua">Dirección de Calidad del Agua</option>
+                                  <option value="Dirección de Organismos Operadores y Atencion a Usuarios">Dirección de Organismos Operadores y Atencion a Usuarios</option>
+                                  <option value="Direccion Juridica">Direccion Juridica</option>
+                                  <option value="Direccion de Planeacion Estrategica">Direccion de Planeacion Estrategica</option>
+                                  <option value="Direccion de Administracion y Finanzas">Direccion de Administracion y Finanzas</option>
                                 </select>
                                 <span class="input-group-addon"><i class="fa fa-users"></i></span>
                               </div> 
@@ -181,8 +185,3 @@
 <?php
 }
 ?>
-<script type="text/javascript">
-  $(document).ready(function(){
-      $("#fechainput").datepicker();
-  });
-</script>
