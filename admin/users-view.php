@@ -61,7 +61,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <?php 
+                            <?php   
                                 $mysqli = mysqli_connect(SERVER, USER, PASS, BD);
                                 mysqli_set_charset($mysqli, "utf8");
 

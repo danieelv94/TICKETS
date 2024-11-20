@@ -118,7 +118,7 @@
                         </div>
 
                         <div class="form-group">
-                          <label  class="col-sm-2 control-label">Departamento</label>
+                          <label  class="col-sm-2 control-label">Direccion</label> 
                           <div class="col-sm-10">
                               <div class='input-group'>
                                   <input type="text" readonly="" class="form-control"  name="departamento_ticket" readonly="" value="<?php echo $reg['departamento']?>">

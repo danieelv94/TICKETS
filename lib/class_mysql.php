@@ -2,13 +2,13 @@
 
 class Mysql {
 
-    public static function Conectar(){
-        if(!$con=  mysqli_connect(SERVER,USER,PASS,BD)){
+    public static function Conectar() {
+        if (!$con = mysqli_connect(SERVER, USER, PASS, BD)) {
             echo "Error en el servidor, verifique sus datos";
         }
         /* Codificar la información de la base de datos a UTF8*/
         mysqli_set_charset($con, "utf8");
-        return $con;  
+        return $con;
     }
 
     public static function consulta($query) {
@@ -17,7 +17,6 @@ class Mysql {
         }
         return $consul;
     }
-
 }
 
 class MysqlQuery {
@@ -45,24 +44,29 @@ class MysqlQuery {
     }
 
     public static function RequestGet($val) {
-        $data = addslashes($_GET[$val]);
-        $var = utf8_decode($data);
-        $datos = MysqlQuery::limpiarCadena($var);
-        return $datos;
+        if (isset($_GET[$val])) { // Verificar si la clave existe
+            $data = addslashes($_GET[$val]);
+            $var = utf8_decode($data);
+            $datos = MysqlQuery::limpiarCadena($var);
+            return $datos;
+        }
+        return null; // Retorna null si no existe
     }
 
     public static function RequestPost($val) {
-        $data = addslashes($_POST[$val]);
-        $var = utf8_decode($data);
-        $datos = MysqlQuery::limpiarCadena($var);
-        return $datos;
+        if (isset($_POST[$val])) { // Verificar si la clave existe
+            $data = addslashes($_POST[$val]);
+            $var = utf8_decode($data);
+            $datos = MysqlQuery::limpiarCadena($var);
+            return $datos;
+        }
+        return null; // Retorna null si no existe
     }
 
     public static function Guardar($tabla, $campos, $valores) {
         if (!$sql = Mysql::consulta("INSERT INTO $tabla ($campos) VALUES($valores)", Mysql::Conectar())) {
             die("Error al insertar los datos en la tabla");
         }
-
         return $sql;
     }
 
@@ -70,7 +74,6 @@ class MysqlQuery {
         if (!$sql = Mysql::consulta("DELETE FROM $tabla WHERE $condicion")) {
             die("Error al eliminar registros en la tabla");
         }
-
         return $sql;
     }
 
@@ -81,4 +84,3 @@ class MysqlQuery {
         return $sql;
     }
 }
-

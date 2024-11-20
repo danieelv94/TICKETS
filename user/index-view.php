@@ -1,25 +1,30 @@
-<!--************ Imagen que reemplaza el carousel para dispositivos moviles ********-->
-<div id="img-linux-tux" class="container hidden-lg hidden-md hidden-sm">
-    <center><img src="img/slide-header.jpg" class="img-responsive img-rounded" alt="Image"></center>
-</div>
-
-
-
-
-
-<div class="container">
+<!-- Contenedor principal sin imágenes ni carrusel -->
+<div id="login-form-container" class="container">
     <div class="row">
-    <div class="col-xs-12 col-md-12 thumbnail">
-          <h3 class="text-center">Generar Ticket de Servicio</h3>
-            <img src="img/new_ticket.png" class="img-responsive logos_GnuLinux" alt="Image" style="height:150px">
+        <div class="col-xs-12 col-md-6 col-md-offset-3 thumbnail">
+            <h3 class="text-center">Iniciar Sesión</h3>
+            
+            <!-- Formulario de login -->
+            <form action="" method="POST" style="margin: 20px;">
+                <div class="form-group">
+                    <label><span class="glyphicon glyphicon-user"></span>&nbsp;Nombre</label>
+                    <input type="text" class="form-control" name="nombre_login" placeholder="Escribe tu nombre" required=""/>
+                </div>
+                <div class="form-group">
+                    <label><span class="glyphicon glyphicon-lock"></span>&nbsp;Contraseña</label>
+                    <input type="password" class="form-control" name="contrasena_login" placeholder="Escribe tu contraseña" required=""/>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-sm">Iniciar sesión</button>
+                    <button type="reset" class="btn btn-danger btn-sm">Cancelar</button>
+                </div>
+            </form>
         </div>
-        <center><a href="#" class="btn btn-primary btn-sm" role="button">Leer más</a></center>
     </div>
 </div>
+
 <script>
     $(document).ready(function(){
-        $("#carousel-example-generic").carousel({
-            interval: 4000,
-        });
+        // Si tienes otro script que necesite inicializar algo, colócalo aquí
     });
 </script>

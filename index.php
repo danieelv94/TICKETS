@@ -1,9 +1,18 @@
 <?php
+// Inicia el buffer de salida al principio del archivo.
+ob_start();
+
+// Inicia la sesión
 session_start();
+
+// Incluye las clases y configuraciones necesarias
 include './lib/class_mysql.php';
 include './lib/config.php';
+
+// Define el tipo de contenido
 header('Content-Type: text/html; charset=UTF-8');  
 ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,7 +26,6 @@ header('Content-Type: text/html; charset=UTF-8');
             <div class="col-sm-12">
               <div class="page-header">
                 <h1 class="animated lightSpeedIn">CEAA</h1>
-               
               </div>
             </div>
           </div>
@@ -27,7 +35,7 @@ header('Content-Type: text/html; charset=UTF-8');
                 $content=$_GET['view'];
                 $WhiteList=["index","soporte","ticket","ticketcon","registro","configuracion"];
                 if(in_array($content, $WhiteList) && is_file("./user/".$content."-view.php")){
-                    include "./user/".$content."-view.php";
+                include "./user/".$content."-view.php";
                 }else{
         ?>
                 <div class="container">
@@ -35,7 +43,6 @@ header('Content-Type: text/html; charset=UTF-8');
                         <div class="col-sm-4">
                             <img src="./img/Stop.png" alt="Image" class="img-responsive"/><br>
                             <img src="./img/SadTux.png" alt="Image" class="img-responsive"/>
-                            
                         </div>
                         <div class="col-sm-7 text-center">
                             <h1 class="text-danger">Lo sentimos, la opción que ha seleccionado no se encuentra disponible</h1>
@@ -50,8 +57,10 @@ header('Content-Type: text/html; charset=UTF-8');
                 include "./user/index-view.php";
             }
         ?>
-
-        
-      <?php include './inc/footer.php'; ?>
     </body>
 </html>
+
+<?php
+// Llama a ob_end_flush() al final para enviar la salida acumulada
+ob_end_flush();
+?>
